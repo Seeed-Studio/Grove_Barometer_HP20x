@@ -1,6 +1,6 @@
 /*
- * File name  : HP20x_dev.cpp
- * Description: Driver for I2C PRECISION BAROMETER AND ALTIMETER [HP206C]
+ * File name  : kalmanFilter.h
+ * Description:  
  * Author     : Oliver Wang from Seeed studio
  * Version    : V0.1
  * Create Time: 2014/04

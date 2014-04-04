@@ -83,9 +83,9 @@ class HP20x_dev : public TwoWire
 	uchar isAvailable();
 	
 	/* Read sensor data */
-	long ReadTemperature(void);
-	long ReadPressure(void);
-	long ReadAltitude(void);
+	ulong ReadTemperature(void);
+	ulong ReadPressure(void);
+	ulong ReadAltitude(void);
 	
   /* Private variables and functions */
   private:

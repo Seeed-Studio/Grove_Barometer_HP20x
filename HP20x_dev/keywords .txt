@@ -22,12 +22,16 @@ HP20X_IIC_ReadData3byte	KEYWORD2
 HP20X_IIC_WriteReg	KEYWORD2
 isAvailable           KEYWORD2
 begin               KEYWORD2 
-
+KalmanFilter        KEYWORD2
+Filter              KEYWORD2
+Gaussian_Noise_Cov  KEYWORD2
 #######################################
 # Instances (KEYWORD2)
 #######################################
 HP20x KEYWORD2
 TwoWire KEYWORD2
+KalmanFilter KEYWORD2
+
 #######################################
 # Constants (LITERAL1)
 #######################################

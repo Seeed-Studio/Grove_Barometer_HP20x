@@ -13,7 +13,7 @@
 #include "HP20x_dev.h"
 #include <Wire.h>
 #include <Arduino.h>
-
+#include "KalmanFilter.h"
 /****************************************************************************/
 /***       Local Variable                                                 ***/
 /****************************************************************************/
@@ -69,7 +69,7 @@ uchar HP20x_dev::isAvailable()
  **@ OutPut:
  **@ Retval:
 */
-long HP20x_dev::ReadTemperature(void)
+ulong HP20x_dev::ReadTemperature(void)
 {
     uchar Temp;
     uchar Temp0;
@@ -78,7 +78,7 @@ long HP20x_dev::ReadTemperature(void)
  
     delay(OSR_ConvertTime);			                    //difference OSR_CFG will be difference OSR_ConvertTime
     HP20X_IIC_WriteCmd(HP20X_READ_T);      
-    long Temperature = HP20X_IIC_ReadData();
+    ulong Temperature = HP20X_IIC_ReadData();
     return Temperature;		
 }
 
@@ -90,12 +90,12 @@ long HP20x_dev::ReadTemperature(void)
  **@ Retval: value
 */
  
-long HP20x_dev::ReadPressure(void)
+ulong HP20x_dev::ReadPressure(void)
 {
     HP20X_IIC_WriteCmd(HP20X_WR_CONVERT_CMD|OSR_CFG);
     delay(OSR_ConvertTime);
     HP20X_IIC_WriteCmd(HP20X_READ_P);
-    long Pressure = HP20X_IIC_ReadData();             
+    ulong Pressure = HP20X_IIC_ReadData();             
     return Pressure;
 } 
 
@@ -106,10 +106,10 @@ long HP20x_dev::ReadPressure(void)
  **@ OutPut: 
  **@ Retval: value
 */
-long HP20x_dev::ReadAltitude(void)
+ulong HP20x_dev::ReadAltitude(void)
 {
     HP20X_IIC_WriteCmd(HP20X_READ_A);
-    long Altitude = HP20X_IIC_ReadData();   
+    ulong Altitude = HP20X_IIC_ReadData();   
     return Altitude;		
 } 
  
@@ -236,10 +236,25 @@ ulong HP20x_dev::HP20X_IIC_ReadData3byte(void)
 	
 	/* MSB */
 	TempData = tmpArray[0]<<16 | tmpArray[1]<<8 | tmpArray[2];
-	if(TempData&0x800000)
+
+	
+    if(TempData&0x800000)
     {
 	    TempData|=0xff000000;
 	}
+
+ /* 	// 24 bit to 32 bit 
+	if(TempData&0x800000)
+	{
+	  // 1:minus 
+	  TempData |= 0x80000000;
+	  TempData &= 0xff7fffff;
+	}
+	else
+	{
+	  // 0:plus 
+	  //do noting
+	}  */
 	return TempData;
 } 
 

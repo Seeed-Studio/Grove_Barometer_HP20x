@@ -13,7 +13,6 @@
 #include <Arduino.h>
 #include <KalmanFilter.h>
 #include <inttypes.h>
-#include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
 

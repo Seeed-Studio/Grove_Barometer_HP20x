@@ -1,11 +1,19 @@
 Grove_barometer HP20x
 ------------
+![](https://raw.githubusercontent.com/SeeedDocument/Grove-Barometer-High-Accuracy/master/img/Grove-Barometer-High-Accuracy.jpg)
+
+[Grove - Barometer (High-Accuracy)](https://www.seeedstudio.com/Grove-Barometer-%28High-Accuracy%29-p-1865.html)
+
+
   This is a driver for Grove_barometer HP20x(high accuracy and waterproof).
-  DataSheet of this sensor:(http://www.hoperf.cn/upload/sensor/HP206C_Datasheet_v1.1.pdf)
+  DataSheet of this sensor:(https://raw.githubusercontent.com/SeeedDocument/Grove-Barometer-High-Accuracy/master/res/HP206C_Datasheet.pdf)
+
 ### Usage
     1.Git clone this resp to your arduino IDE's lib directory.
 	2.Open the demo "HP20x_dev"
-    
+
+More information please visit [wiki page](http://wiki.seeedstudio.com/Grove-Barometer-High-Accuracy/).
+
 ----
 
 This software is written by Oliver Wang (long.wang@seeedstudio.com) for seeed studio<br>

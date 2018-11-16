@@ -66,21 +66,26 @@ typedef unsigned long   ulong;
 #define T_TRAV_CFG              0X04
 
 #define OK_HP20X_DEV            0X80		//HP20x_dev successfully initialized
-#define REG_PARA                0X0F        //Status register
+#define REG_PARA                0X0F    /*This register has only one valid bit of CMPS_EN. 
+																					The user can use this bit to determine whether to 
+																					enable the data compensation during the conversion 
+																					process (0: disable, 1: enable). If it is enabled, 
+																					the 24‐bit or 48‐bit data read out by the commands 
+																					are fully compensated. If it is disabled, the data 
+																					read out are the raw data output.*/ 
 
 /****************************************************************************/
 /***        Class Definitions                                             ***/
 /****************************************************************************/
 class HP20x_dev : public TwoWire
 {
-  /* Public variables and functions */
-  public:
-    uchar OSR_CFG;
+/* Public variables and functions */
+public:
+  uchar OSR_CFG;
 	uint  OSR_ConvertTime;
-    /* Constructor */
-    HP20x_dev();	
+	/* Constructor */
+	HP20x_dev();	
 	void begin();
-	uchar isAvailable();
 	
 	/* Read sensor data */
 	ulong ReadTemperature(void);
@@ -90,12 +95,16 @@ class HP20x_dev : public TwoWire
   /* Private variables and functions */
   private:
     /* Write a command to HP20x */
-	void HP20X_IIC_WriteCmd(uchar uCmd);	
+	void HP20X_IIC_WriteCmd(uchar uCmd);
 	/* Read register value */
 	uchar HP20X_IIC_ReadReg(uchar bReg);	
 	void HP20X_IIC_WriteReg(uchar bReg,uchar bData);	 	
 	ulong HP20X_IIC_ReadData(void);
 	ulong HP20X_IIC_ReadData3byte(void);
+
+	/* Enable or disable compensation */	
+	void HP20X_EnableCompensate(void);
+	void HP20X_DisableCompensate(void);
 };
 extern HP20x_dev HP20x;
 #endif

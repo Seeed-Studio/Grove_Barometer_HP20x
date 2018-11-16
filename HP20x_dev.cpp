@@ -48,20 +48,10 @@ void HP20x_dev::begin()
   Wire.begin();
   /* Reset HP20x_dev */
   HP20x.HP20X_IIC_WriteCmd(HP20X_SOFT_RST);
+	HP20x.HP20X_EnableCompensate();
+
 }
 
-/*
- **@ Function name: isAvailable
- **@ Description: Indicate whether it's available
- **@ Input: none
- **@ OutPut: none
- **@ Retval: uchar 
-*/
-uchar HP20x_dev::isAvailable()
-{
-  uchar ret = HP20x.HP20X_IIC_ReadReg(REG_PARA);
-  return ret;
-}
 /*
  **@ Function name: ReadTemperature
  **@ Description: Read Temperature from HP20x_dev
@@ -70,16 +60,12 @@ uchar HP20x_dev::isAvailable()
  **@ Retval:
 */
 ulong HP20x_dev::ReadTemperature(void)
-{
-    uchar Temp;
-    uchar Temp0;
-     
+{   
 	HP20X_IIC_WriteCmd(HP20X_WR_CONVERT_CMD|OSR_CFG);	//ADC convert
- 
-    delay(OSR_ConvertTime);			                    //difference OSR_CFG will be difference OSR_ConvertTime
-    HP20X_IIC_WriteCmd(HP20X_READ_T);      
-    ulong Temperature = HP20X_IIC_ReadData();
-    return Temperature;		
+	delay(OSR_ConvertTime);			                    //difference OSR_CFG will be difference OSR_ConvertTime
+	HP20X_IIC_WriteCmd(HP20X_READ_T);      
+	ulong Temperature = HP20X_IIC_ReadData();
+	return Temperature;		
 }
 
 /*
@@ -174,10 +160,11 @@ uchar HP20x_dev::HP20X_IIC_ReadReg(uchar bReg)
     HP20X_IIC_WriteCmd(bReg|HP20X_RD_REG_MODE);	
 	 
 	Wire.requestFrom(HP20X_I2C_DEV_ID, 1);	 
-	while(Wire.available())
-	{
-	    Temp = Wire.read();
-	}
+	// while(Wire.available())
+	// {
+	//     Temp = Wire.read();
+	// }
+	Temp = Wire.read();
 	 
 	return Temp;
 } 
@@ -258,5 +245,20 @@ ulong HP20x_dev::HP20X_IIC_ReadData3byte(void)
 	return TempData;
 } 
 
+/**
+ * @brief Enable Compensation by set CMPS_EN bit on 0x0F PARA register 
+*/
+void HP20x_dev::HP20X_EnableCompensate(void)
+{
+	HP20X_IIC_WriteReg(REG_PARA, OK_HP20X_DEV);
+}
+
+/**
+ * @brief Disable Compensation by clear CMPS_EN bit on 0x0F PARA register 
+*/
+void HP20x_dev::HP20X_DisableCompensate(void)
+{
+	HP20X_IIC_WriteReg(REG_PARA, 0);
+}
 
 /**************************************END OF FILE**************************************/

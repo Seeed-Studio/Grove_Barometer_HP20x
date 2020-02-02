@@ -1,10 +1,10 @@
 /*
- * File name  : HP20x_dev.h
- * Description: Driver for I2C PRECISION BAROMETER AND ALTIMETER [HP206C]
- * Author     : Oliver Wang from Seeed studio
- * Version    : V0.1
- * Create Time: 2014/04
- * Change Log :
+    File name  : HP20x_dev.h
+    Description: Driver for I2C PRECISION BAROMETER AND ALTIMETER [HP206C]
+    Author     : Oliver Wang from Seeed studio
+    Version    : V0.1
+    Create Time: 2014/04
+    Change Log :
 */
 #ifndef _HP20X_DEV_H
 #define _HP20X_DEV_H
@@ -41,12 +41,12 @@ typedef unsigned long   ulong;
 #define HP20X_WR_REG_MODE      0xC0
 #define HP20X_RD_REG_MODE      0x80
 
-#define ERR_WR_DEVID_NACK       0x01    
-#define ERR_RD_DEVID_NACK       0x02    
-#define ERR_WR_REGADD_NACK      0x04   
-#define ERR_WR_REGCMD_NACK      0x08   
-#define ERR_WR_DATA_NACK        0x10     
-#define ERR_RD_DATA_MISMATCH    0x20 
+#define ERR_WR_DEVID_NACK       0x01
+#define ERR_RD_DEVID_NACK       0x02
+#define ERR_WR_REGADD_NACK      0x04
+#define ERR_WR_REGCMD_NACK      0x08
+#define ERR_WR_DATA_NACK        0x10
+#define ERR_RD_DATA_MISMATCH    0x20
 
 #define I2C_DID_WR_MASK         0xFE
 #define I2C_DID_RD_MASK         0x01
@@ -72,39 +72,38 @@ typedef unsigned long   ulong;
 																					process (0: disable, 1: enable). If it is enabled, 
 																					the 24‐bit or 48‐bit data read out by the commands 
 																					are fully compensated. If it is disabled, the data 
-																					read out are the raw data output.*/ 
+																					read out are the raw data output.*/
 
 /****************************************************************************/
 /***        Class Definitions                                             ***/
 /****************************************************************************/
-class HP20x_dev : public TwoWire
-{
-/* Public variables and functions */
-public:
-  uchar OSR_CFG;
-	uint  OSR_ConvertTime;
-	/* Constructor */
-	HP20x_dev();	
-	void begin();
-	
-	/* Read sensor data */
-	ulong ReadTemperature(void);
-	ulong ReadPressure(void);
-	ulong ReadAltitude(void);
-	
-  /* Private variables and functions */
+class HP20x_dev : public TwoWire {
+    /* Public variables and functions */
+  public:
+    uchar OSR_CFG;
+    uint  OSR_ConvertTime;
+    /* Constructor */
+    HP20x_dev();
+    void begin();
+
+    /* Read sensor data */
+    ulong ReadTemperature(void);
+    ulong ReadPressure(void);
+    ulong ReadAltitude(void);
+
+    /* Private variables and functions */
   private:
     /* Write a command to HP20x */
-	void HP20X_IIC_WriteCmd(uchar uCmd);
-	/* Read register value */
-	uchar HP20X_IIC_ReadReg(uchar bReg);	
-	void HP20X_IIC_WriteReg(uchar bReg,uchar bData);	 	
-	ulong HP20X_IIC_ReadData(void);
-	ulong HP20X_IIC_ReadData3byte(void);
+    void HP20X_IIC_WriteCmd(uchar uCmd);
+    /* Read register value */
+    uchar HP20X_IIC_ReadReg(uchar bReg);
+    void HP20X_IIC_WriteReg(uchar bReg, uchar bData);
+    ulong HP20X_IIC_ReadData(void);
+    ulong HP20X_IIC_ReadData3byte(void);
 
-	/* Enable or disable compensation */	
-	void HP20X_EnableCompensate(void);
-	void HP20X_DisableCompensate(void);
+    /* Enable or disable compensation */
+    void HP20X_EnableCompensate(void);
+    void HP20X_DisableCompensate(void);
 };
 extern HP20x_dev HP20x;
 #endif

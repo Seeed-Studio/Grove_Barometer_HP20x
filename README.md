@@ -1,4 +1,4 @@
-Grove_barometer HP20x
+Grove_barometer HP20x  [![Build Status](https://travis-ci.com/Seeed-Studio/Grove_Barometer_HP20x.svg?branch=master)](https://travis-ci.com/Seeed-Studio/Grove_Barometer_HP20x)
 ------------
 ![](https://raw.githubusercontent.com/SeeedDocument/Grove-Barometer-High-Accuracy/master/img/Grove-Barometer-High-Accuracy.jpg)
 

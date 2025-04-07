@@ -4,6 +4,7 @@
     Author      : Oliver Wang from Seeed Studio
     Version     : V0.1
     Change log  : Add kalman filter 2014/04/04
+                  Update the chip to HP206F 2025/04/07
 */
 
 #include <HP20x_dev.h>

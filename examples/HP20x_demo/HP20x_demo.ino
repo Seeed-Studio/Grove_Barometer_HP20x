@@ -2,7 +2,7 @@
     Demo name   : HP20x_dev demo
     Usage       : I2C PRECISION BAROMETER AND ALTIMETER [HP206F hopeRF]
     Author      : Oliver Wang from Seeed Studio
-    Version     : V0.1
+    Version     : V0.2
     Change log  : Add kalman filter 2014/04/04
                   Update the chip to HP206F 2025/04/07
 */
